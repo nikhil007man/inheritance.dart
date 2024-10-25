@@ -1,37 +1,82 @@
-class Vehicle {
-  
-  String brand;
-  int year;
+// Base class: Animal
+class Animal {
+  String name;
+  int age;
 
- 
-  Vehicle(this.brand, this.year);
+  // Constructor for Animal
+  Animal(this.name, this.age);
 
-
+  // Method to display animal information
   void displayInfo() {
-    print("This vehicle is a $brand, manufactured in $year.");
+    print("$name is $age years old.");
+  }
+
+  // Method for the animal to make a sound
+  void makeSound() {
+    print("$name makes a sound.");
   }
 }
 
-class Car extends Vehicle {
-  String model;
+// Subclass: Dog
+class Dog extends Animal {
+  String breed;
+
+  // Constructor for Dog, calling the superclass constructor
+  Dog(String name, int age, this.breed) : super(name, age);
+
+  // Method specific to Dog
+  void showBreed() {
+    print("$name is a $breed.");
+  }
+
+  // Overriding the makeSound method to make a dog-specific sound
+  @override
+  void makeSound() {
+    print("$name barks.");
+  }
+}
+
+// Subclass: Bird
+class Bird extends Animal {
+  bool canFly;
 
   
-  Car(String brand, int year, this.model) : super(brand, year);
+  Bird(String name, int age, this.canFly) : super(name, age);
 
   
-  void showDetails() {
-    print("This is a $model model from $brand.");
+  @override
+  void makeSound() {
+    print("$name chirps.");
+  }
+
+  
+  void showFlightAbility() {
+    String flightAbility = canFly ? "can fly" : "cannot fly";
+    print("$name $flightAbility.");
   }
 }
 
 void main() {
-  
-  Vehicle myVehicle = Vehicle("Toyota", 2018);
+  // Creating an Animal object
+  Animal genericAnimal = Animal("Animal", 3);
+  genericAnimal.displayInfo();
+  genericAnimal.makeSound();
+
+  // Creating a Dog object
+  Dog myDog = Dog("Buddy", 5, "Golden Retriever");
+  myDog.displayInfo(); 
+  myDog.showBreed();   
+  myDog.makeSound();   
+
+  // Creating a Bird object
+  Bird myBird = Bird("Tweety", 2, true);
+  myBird.displayInfo(); 
+  myBird.makeSound();   
+  myBird.showFlightAbility(); 
 
   
-  myVehicle.displayInfo();
-
-  
-  Car myCar = Car("Toyota", 2018, "Corolla");
-  myCar.displayInfo(); 
-  myCar.showDetails(); 
+  Bird penguin = Bird("Penguin", 4, false);
+  penguin.displayInfo();
+  penguin.makeSound();
+  penguin.showFlightAbility();
+}
